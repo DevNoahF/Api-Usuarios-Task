@@ -1,5 +1,6 @@
 package java10x.devnoah.apicadastro.Task;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java10x.devnoah.apicadastro.Usuario.UsuarioModel;
 import lombok.AllArgsConstructor;
@@ -23,5 +24,6 @@ public class TaskModel {
     private String descricao;
 
     @OneToMany(mappedBy = "task",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<UsuarioModel> usuarios;
 }
