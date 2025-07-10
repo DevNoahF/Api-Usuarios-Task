@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("usuario")
+@RequestMapping("usuarios")
 public class UsuarioController {
 
     private UsuarioService usuarioService;
@@ -20,8 +20,8 @@ public class UsuarioController {
 
     //Add
     @PostMapping("/criar")
-    public String criarUsuario(){
-        return "Usuário criado com sucesso!";
+    public UsuarioModel criarUser(@RequestBody UsuarioModel usuarioModel){
+        return usuarioService.criarUser(usuarioModel);
     }
 
     //Delete
@@ -37,9 +37,9 @@ public class UsuarioController {
     }
 
     //read id - return id
-    @GetMapping("/listar/id")
-    public String listarporid(){
-        return "Lista de usuário por id";
+    @GetMapping("/listar/{id}")
+    public UsuarioModel listarId(@PathVariable Long id){
+        return usuarioService.listarPorId(id);
     }
 
     //edit - update
