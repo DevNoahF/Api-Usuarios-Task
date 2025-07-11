@@ -13,11 +13,6 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/boasVindas")
-    public String boasVindas(){
-        return "Essa é minha primeira mensagem nessa rota!";
-    }
-
     //Add
     @PostMapping("/criar")
     public UsuarioModel criarUser(@RequestBody UsuarioModel usuarioModel){
@@ -25,9 +20,9 @@ public class UsuarioController {
     }
 
     //Delete
-    @DeleteMapping("/deletar/id")
-    public String deletarUsuario(){
-        return "Usuario deletado";
+    @DeleteMapping("/deletar/{id}")
+    public void deletar(@PathVariable Long id){
+        usuarioService.deletarUserId(id);
     }
 
     //read-return

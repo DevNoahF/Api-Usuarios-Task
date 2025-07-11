@@ -24,9 +24,15 @@ public class UsuarioService {
         return usuarioRepository.save(usuarioModel);
     }
 
-    // Método para deletar um usuário por ID
+    // Método para listar um usuário por ID
     public UsuarioModel listarPorId(Long id){
         Optional<UsuarioModel> usuario = usuarioRepository.findById(id);
         return usuario.orElse(null);
     }
+
+    // Método para deletar um usuário por ID
+    public void deletarUserId(Long id){
+        usuarioRepository.deleteById(id);
+    }
+
 }
