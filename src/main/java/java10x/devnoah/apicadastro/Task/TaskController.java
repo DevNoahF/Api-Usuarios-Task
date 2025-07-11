@@ -1,6 +1,7 @@
 package java10x.devnoah.apicadastro.Task;
 
 import java10x.devnoah.apicadastro.Usuario.UsuarioModel;
+import java10x.devnoah.apicadastro.Usuario.UsuarioService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +22,8 @@ public class TaskController {
     }
 
     @DeleteMapping("/deletar/{id}")
-    public String deletar(){
-        return "tarefa deletada";
+    public void deletar(@PathVariable Long id){
+        taskService.deletarTaskId(id);
     }
 
     @GetMapping("/listar")
@@ -34,6 +35,7 @@ public class TaskController {
     public TaskModel listarPorId(@PathVariable Long id){
         return taskService.listarPorId(id);
     }
+
 
 
 
