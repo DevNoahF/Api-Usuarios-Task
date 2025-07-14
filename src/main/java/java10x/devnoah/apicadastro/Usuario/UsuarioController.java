@@ -38,9 +38,9 @@ public class UsuarioController {
     }
 
     //edit - update
-    @PutMapping("/editar/id")
-    public String editarUsuario() {
-        return "Usuário editado com sucesso!";
+    @PutMapping("/atualizar/{id}")
+    public UsuarioModel atualizar(@PathVariable Long id, @RequestBody UsuarioModel usuario) {
+        return usuarioService.atualizarPorId(id,usuario);
     }
 
 

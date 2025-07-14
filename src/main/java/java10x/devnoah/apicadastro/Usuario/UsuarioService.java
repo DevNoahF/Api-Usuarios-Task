@@ -35,4 +35,10 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
+    // Método para editar um usuário
+    public UsuarioModel atualizarPorId(Long id, UsuarioModel usuario){
+        if(usuarioRepository.existsById(id)){
+            usuario.setId(id);}
+        return usuarioRepository.save(usuario);
+    }
 }
