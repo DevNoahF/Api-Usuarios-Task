@@ -36,6 +36,10 @@ public class TaskController {
         return taskService.listarPorId(id);
     }
 
+    @PutMapping("/atualizar/{id}")
+    public TaskModel atualizar(@PathVariable Long id, @RequestBody TaskModel task){
+        return taskService.atualizarPorId(id,task);
+    }
 
 
 

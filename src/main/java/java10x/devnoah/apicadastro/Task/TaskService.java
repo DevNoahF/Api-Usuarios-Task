@@ -1,5 +1,7 @@
 package java10x.devnoah.apicadastro.Task;
 
+import java10x.devnoah.apicadastro.Usuario.UsuarioModel;
+import java10x.devnoah.apicadastro.Usuario.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -7,8 +9,8 @@ import java.util.Optional;
 
 @Service
 public class TaskService {
-    private TaskRepository taskRepository;
 
+    private TaskRepository taskRepository;
     public TaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
@@ -34,5 +36,12 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
+    //editar
+    public TaskModel atualizarPorId(Long id, TaskModel task) {
+        if(taskRepository.existsById(id)){
+            taskRepository.save(task);
+        }
+        return taskRepository.save(task);
+    }
 
 }
