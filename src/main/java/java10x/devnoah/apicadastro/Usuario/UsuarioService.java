@@ -1,5 +1,6 @@
 package java10x.devnoah.apicadastro.Usuario;
 
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,10 +9,10 @@ import java.util.Optional;
 @Service
 public class UsuarioService {
     private UsuarioRepository usuarioRepository;
-
-    // Construtor para injeção de dependência do repositório
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    private UsuarioMapper usuarioMapper;
+    public UsuarioService(UsuarioRepository usuarioRepository, UsuarioMapper usuarioMapper) {
         this.usuarioRepository = usuarioRepository;
+        this.usuarioMapper = usuarioMapper;
     }
 
     // Método para listar todos os usuários
@@ -20,8 +21,10 @@ public class UsuarioService {
     }
 
     // Método para criar um novo usuário
-    public UsuarioModel criarUser(UsuarioModel usuarioModel){
-        return usuarioRepository.save(usuarioModel);
+    public UsuarioDTO criarUser(UsuarioDTO usuarioDTO){
+        UsuarioModel usuarioModel = usuarioMapper.map(usuarioDTO);
+        UsuarioModel usuario = usuarioRepository.save(usuarioModel);
+        return usuarioMapper.map(usuario);
     }
 
     // Método para listar um usuário por ID

@@ -15,8 +15,8 @@ public class UsuarioController {
 
     //Add
     @PostMapping("/criar")
-    public UsuarioModel criarUser(@RequestBody UsuarioModel usuarioModel){
-        return usuarioService.criarUser(usuarioModel);
+    public UsuarioDTO criarUser(@RequestBody UsuarioDTO usuario){
+        return usuarioService.criarUser(usuario);
     }
 
     //Delete
