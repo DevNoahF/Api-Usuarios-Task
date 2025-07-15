@@ -1,7 +1,6 @@
 package java10x.devnoah.apicadastro.Task;
 
-import java10x.devnoah.apicadastro.Usuario.UsuarioModel;
-import java10x.devnoah.apicadastro.Usuario.UsuarioRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,13 +10,17 @@ import java.util.Optional;
 public class TaskService {
 
     private TaskRepository taskRepository;
-    public TaskService(TaskRepository taskRepository) {
+    private TaskMapper taskMapper;
+    public TaskService(TaskRepository taskRepository, TaskMapper taskMapper) {
         this.taskRepository = taskRepository;
+        this.taskMapper = taskMapper;
     }
 
     // Método para criar uma nova tarefa
-    public TaskModel criarTask(TaskModel taskModel) {
-        return taskRepository.save(taskModel);
+    public TaskDTO criarTask(TaskDTO taskDTO) {
+        TaskModel task = taskMapper.map(taskDTO);
+        TaskModel taskSave = taskRepository.save(task);
+        return taskMapper.map(taskSave);
     }
 
     // listar

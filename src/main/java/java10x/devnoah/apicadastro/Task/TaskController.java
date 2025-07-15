@@ -17,8 +17,8 @@ public class TaskController {
 
 
     @PostMapping("/criar")
-    public TaskModel criarTask(@RequestBody TaskModel taskModel){
-        return taskService.criarTask(taskModel);
+    public TaskDTO criarTask(@RequestBody TaskDTO taskDTO) {
+        return taskService.criarTask(taskDTO);
     }
 
     @DeleteMapping("/deletar/{id}")
