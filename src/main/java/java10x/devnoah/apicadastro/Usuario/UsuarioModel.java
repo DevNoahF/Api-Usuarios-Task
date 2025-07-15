@@ -21,6 +21,7 @@ public class UsuarioModel {
     @Column(unique = true)
     private String email;
     private int idade;
+    private String sexo;
 
     @ManyToOne
     @JoinColumn(name = "task_id")
