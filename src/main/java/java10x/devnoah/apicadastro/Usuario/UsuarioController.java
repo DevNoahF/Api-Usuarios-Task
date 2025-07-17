@@ -15,8 +15,8 @@ public class UsuarioController {
 
     //Add
     @PostMapping("/criar")
-    public UsuarioModel criarUser(@RequestBody UsuarioModel usuarioModel){
-        return usuarioService.criarUser(usuarioModel);
+    public UsuarioDTO criarUser(@RequestBody UsuarioDTO usuario){
+        return usuarioService.criarUser(usuario);
     }
 
     //Delete
@@ -27,19 +27,19 @@ public class UsuarioController {
 
     //read-return
     @GetMapping("/listar")
-    public List<UsuarioModel> listar(){
+    public List<UsuarioDTO> listar(){
         return usuarioService.listar();
     }
 
     //read id - return id
     @GetMapping("/listar/{id}")
-    public UsuarioModel listarId(@PathVariable Long id){
+    public UsuarioDTO listarId(@PathVariable Long id){
         return usuarioService.listarPorId(id);
     }
 
     //edit - update
     @PutMapping("/atualizar/{id}")
-    public UsuarioModel atualizar(@PathVariable Long id, @RequestBody UsuarioModel usuario) {
+    public UsuarioDTO atualizar(@PathVariable Long id, @RequestBody UsuarioDTO usuario) {
         return usuarioService.atualizarPorId(id,usuario);
     }
 
