@@ -1,5 +1,7 @@
 package java10x.devnoah.apicadastro.Usuario;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,38 +11,62 @@ import java.util.List;
 public class UsuarioController {
 
     private UsuarioService usuarioService;
+
     public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
 
     //Add
     @PostMapping("/criar")
-    public UsuarioDTO criarUser(@RequestBody UsuarioDTO usuario){
-        return usuarioService.criarUser(usuario);
+    public ResponseEntity<String> criarUser(@RequestBody UsuarioDTO usuario) {
+        UsuarioDTO novoUser = usuarioService.criarUser(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Usuario : " + novoUser.getNome().toUpperCase() + " com ID : " + novoUser.getId() + " foi criado!");
     }
 
     //Delete
     @DeleteMapping("/deletar/{id}")
-    public void deletar(@PathVariable Long id){
-        usuarioService.deletarUserId(id);
+    public ResponseEntity<String> deletar(@PathVariable Long id) {
+        if (usuarioService.listarPorId(id) != null) {
+            usuarioService.deletarUserId(id);
+            return ResponseEntity.ok("Usuario de ID : " + id + " foi deletado!");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("O usuario de ID : " + id + " não foi encontrado.");
+        }
+
     }
 
     //read-return
     @GetMapping("/listar")
-    public List<UsuarioDTO> listar(){
-        return usuarioService.listar();
+    public ResponseEntity<List<UsuarioDTO>> listar() {
+        List<UsuarioDTO> usuario = usuarioService.listar();
+        return ResponseEntity.ok(usuario);
     }
 
     //read id - return id
     @GetMapping("/listar/{id}")
-    public UsuarioDTO listarId(@PathVariable Long id){
-        return usuarioService.listarPorId(id);
+    public ResponseEntity<?> listarId(@PathVariable Long id) {
+        UsuarioDTO usuario = usuarioService.listarPorId(id);
+        if (usuario != null){
+            return ResponseEntity.ok(usuario);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("O usuario com ID: " + id + " não foi encontrado!");
+        }
     }
+
 
     //edit - update
     @PutMapping("/atualizar/{id}")
-    public UsuarioDTO atualizar(@PathVariable Long id, @RequestBody UsuarioDTO usuario) {
-        return usuarioService.atualizarPorId(id,usuario);
+    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+        UsuarioDTO usuario = usuarioService.atualizarPorId(id,usuarioDTO);
+        if (usuario != null){
+            return ResponseEntity.ok(usuario);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Usuario com id: " + id + " não encontrado");
+        }
     }
 
 
