@@ -1,11 +1,7 @@
 package java10x.devnoah.apicadastro.Task;
-
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.config.Task;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
