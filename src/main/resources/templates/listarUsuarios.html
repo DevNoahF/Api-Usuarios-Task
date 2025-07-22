@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Listar Usuários</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 40px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        thead {
+            background-color: #2980b9;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f0f8ff;
+        }
+
+        td a {
+            text-decoration: none;
+            color: #2980b9;
+            margin-right: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        td a:hover {
+            color: #1c5980;
+        }
+
+        .btn-voltar {
+            display: block;
+            width: fit-content;
+            margin: 10px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-voltar:hover {
+            background-color: #0050A6; /* Cor mais escura ao passar o mouse */
+        }
+
+
+        /* Estilo para o botão */
+        .btn-criar-usuario {
+            display: block; /* Para ocupar a largura total e permitir margin: auto */
+            width: fit-content; /* Ajusta a largura ao conteúdo */
+            margin: 20px auto; /* Centraliza o botão horizontalmente e adiciona margem */
+            padding: 10px 20px;
+            background-color: #28a745; /* Cor verde para "criar" */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none; /* Remove sublinhado do link */
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-criar-usuario:hover {
+            background-color: #218838; /* Escurece no hover */
+        }
+    </style>
+
+</head>
+<body>
+
+
+<h1>Tabela de Usuários</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Idade</th>
+        <th>Sexo</th>
+        <th>Email</th>
+        <th>Task</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usuario : ${usuarios}">
+        <td th:text="${usuario.id}">ID</td>
+        <td th:text="${usuario.nome}">Nome</td>
+        <td th:text="${usuario.idade}">Idade</td>
+        <td th:text="${usuario.sexo}">Sexo</td>
+        <td th:text="${usuario.email}">Email</td>
+
+        <td>
+        <span th:if="${usuario.task != null}"
+             th:text="${usuario.task.nome}"><br>
+        </span>
+            <span th:if="${usuario.task == null}">
+            Sem Tasks cadastradas para o usuário.
+        </span>
+        </td>
+
+        <td>
+            <a th:href="@{/ui/detalhes/{id}(id=${usuario.id})}">Ver detalhes</a> |
+            <a th:href="@{/ui/deletar/{id}(id=${usuario.id})}">Deletar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/ui/adicionar}" class="btn-criar-usuario">
+    Criar Novo Usuário
+</a>
+<a th:href="@{/ui/listarTasks}" class="btn-voltar">
+    Listar Tasks
+</a>
+</body>
+</html>
