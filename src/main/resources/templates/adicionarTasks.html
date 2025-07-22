@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Adicionar Tasks</title>
+    <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f2f6ff;
+            margin: 0;
+            padding: 0;
+            color: #1f2d3d;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            color: #2c3e50;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-left: 6px solid #2980b9;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"] { /* Mantido caso você adicione esses tipos no futuro */
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Adicionado transição para box-shadow */
+        }
+
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+        }
+
+        button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 12px;
+            background-color: #2980b9;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Adicionado transição para transform */
+        }
+
+        button:hover {
+            background-color: #22628C;
+            transform: translateY(-2px);
+        }
+
+        .mensagem {
+            background-color: #ffffff;
+            color: #084298;
+            padding: 10px;
+            border: 1px solid #ffffff;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-align: center;/* Centraliza a mensagem */
+            font-weight: 500;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+<h1>Adicionar Nova Task </h1>
+<div class="form-container">
+    <div th:if="${mensagem}" class="mensagem" th:text="${mensagem}"></div>
+    <form th:action="@{/ui/salvarTask}" th:object="${taskDTO}" method="post">
+        <label for="nome">Nome da Task:</label>
+        <input type="text" id="nome" th:field="*{nome}" required autofocus/> <label for="descricao">Descrição:</label>
+        <input type="text" id="descricao" th:field="*{descricao}" required />
+
+        <button type="submit">Cadastrar Task</button>
+    </form>
+    <a th:href="@{/ui/listarTasks}">Ver todas as Tasks</a> </div>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tasks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 40px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        thead {
+            background-color: #2980b9;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f0f8ff;
+        }
+
+        td a {
+            text-decoration: none;
+            color: #2980b9;
+            margin-right: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        td a:hover {
+            color: #1c5980;
+        }
+
+        .sem-task {
+            color: #e74c3c;
+            font-style: italic;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-voltar {
+            display: block;
+            width: fit-content;
+            margin: 10px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-voltar:hover {
+            background-color: #0050A6; /* Cor mais escura ao passar o mouse */
+        }
+
+
+        .btn-criar-usuario {
+            display: block;
+            width: fit-content;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-criar-usuario:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Tabela de Tasks</h1>
+
+<!-- Mensagem se não houver tasks -->
+<div th:if="${#lists.isEmpty(tasks)}" class="sem-task">
+    Nenhuma task cadastrada ainda.
+</div>
+
+<!-- Tabela se houver tasks -->
+<table border="1" th:if="${not #lists.isEmpty(tasks)}">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasks}">
+        <td th:text="${task.id}">ID</td>
+        <td th:text="${task.nome}">Nome</td>
+        <td th:text="${task.descricao}">Descrição</td>
+        <td>
+            <a th:href="@{/ui/deletarTask/{id}(id=${task.id})}">Deletar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Botão de criar nova task -->
+<a th:href="@{/ui/addTasks}" class="btn-criar-usuario">
+    Criar Nova Task
+</a>
+<a th:href="@{/ui/listar}" class="btn-voltar">
+    Voltar para lista de Usuarios
+</a>
+
+</body>
+</html>

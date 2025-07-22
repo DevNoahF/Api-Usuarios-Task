@@ -14,6 +14,7 @@ public class TaskService {
 
     private TaskRepository taskRepository;
     private TaskMapper taskMapper;
+
     public TaskService(TaskRepository taskRepository, TaskMapper taskMapper) {
         this.taskRepository = taskRepository;
         this.taskMapper = taskMapper;
@@ -27,11 +28,11 @@ public class TaskService {
     }
 
     // listar
-    public List<TaskDTO> listar(){
+    public List<TaskDTO> listar() {
         List<TaskModel> task = taskRepository.findAll();
-            return task.stream()
-                    .map(taskMapper::map)
-                    .collect(Collectors.toList());
+        return task.stream()
+                .map(taskMapper::map)
+                .collect(Collectors.toList());
     }
 
     // listar por id
@@ -41,7 +42,7 @@ public class TaskService {
     }
 
     //deletar
-    public void deletarTaskId(Long id){
+    public void deletarTaskId(Long id) {
         taskRepository.deleteById(id);
     }
 

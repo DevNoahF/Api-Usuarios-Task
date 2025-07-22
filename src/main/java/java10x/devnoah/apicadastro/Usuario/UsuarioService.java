@@ -1,4 +1,6 @@
 package java10x.devnoah.apicadastro.Usuario;
+import java10x.devnoah.apicadastro.Task.TaskDTO;
+import java10x.devnoah.apicadastro.Task.TaskModel;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
